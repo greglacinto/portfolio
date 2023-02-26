@@ -8,33 +8,54 @@ import {
   faStackOverflow,
 } from "@fortawesome/free-brands-svg-icons";
 import { Box, HStack } from "@chakra-ui/react";
+import { Link, ListItem, UnorderedList } from "@chakra-ui/react";
+// import { Link as ReachLink } from "@reach/router"
 
 const socials = [
   {
     icon: faEnvelope,
     url: "mailto: hello@example.com",
+    id: 1
   },
   {
     icon: faGithub,
     url: "https://github.com",
+    id: 2
   },
   {
     icon: faLinkedin,
     url: "https://www.linkedin.com",
+    id:3
   },
   {
     icon: faMedium,
     url: "https://medium.com",
+    id:4
   },
   {
     icon: faStackOverflow,
     url: "https://stackoverflow.com",
+    id:5
   },
 ];
+
+const listItems = socials.map(
+  (element) => {
+    return (
+        <ListItem listStyleType = 'none' key={element.id} >
+          <Link href={element.url}>
+            <FontAwesomeIcon icon={element.icon} size="2x" />
+          </Link>
+        </ListItem>
+    )
+  }
+)
+
 
 const Header = () => {
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
+    console.log(id);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({
@@ -56,20 +77,38 @@ const Header = () => {
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto">
+      <Box color="white" maxWidth="1280px" margin="0 auto" style={{border: '1px solid white'}}>
         <HStack
           px={16}
           py={4}
-          justifyContent="space-between"
+          justifyContent="space-around"
           alignItems="center"
         >
-          <nav>
+          <nav style={{border: '1px solid white'}}>
             {/* Add social media links based on the `socials` data */}
+              <UnorderedList>
+                <HStack>
+                  {listItems}
+                </HStack>
+              </UnorderedList>
           </nav>
-          <nav>
-            <HStack spacing={8}>
-              {/* Add links to Projects and Contact me section */}
-            </HStack>
+          <nav style={{border: '1px solid white'}}>
+            <UnorderedList>
+              <HStack spacing={8}>
+                {/* Add links to Projects and Contact me section */}
+                <ListItem listStyleType='none'>
+                  <Link  
+                  href="/#projects" 
+                  onClick={handleClick('projects')}>
+                    Projects
+                  </Link>
+                </ListItem>
+                <ListItem listStyleType='none'>
+                  <Link  href="/#contact-me"  
+                  onClick={handleClick('contactme')}>Contact Me</Link>
+                </ListItem>
+              </HStack>
+            </UnorderedList>
           </nav>
         </HStack>
       </Box>
