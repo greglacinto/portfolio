@@ -14,17 +14,17 @@ import { Link, ListItem, UnorderedList } from "@chakra-ui/react";
 const socials = [
   {
     icon: faEnvelope,
-    url: "mailto: hello@example.com",
+    url: "mailto: greglacinto@gmail.com",
     id: 1
   },
   {
     icon: faGithub,
-    url: "https://github.com",
+    url: "https://github.com/greglacinto",
     id: 2
   },
   {
     icon: faLinkedin,
-    url: "https://www.linkedin.com",
+    url: "https://www.linkedin.com/in/dev-gregory-odiase/",
     id:3
   },
   {
@@ -44,7 +44,10 @@ const listItems = socials.map(
     return (
         <ListItem listStyleType = 'none' key={element.id} >
           <Link href={element.url}>
-            <FontAwesomeIcon icon={element.icon} size="2x" />
+            <FontAwesomeIcon icon={element.icon} 
+            size="2x"
+            style={{border: '1px solid white'}}
+            />
           </Link>
         </ListItem>
     )
@@ -84,10 +87,13 @@ const Header = () => {
           justifyContent="space-around"
           alignItems="center"
         >
-          <nav style={{border: '1px solid white'}}>
+          <nav style={{border: '1px solid white'}}
+            
+          >
             {/* Add social media links based on the `socials` data */}
               <UnorderedList>
-                <HStack>
+                <HStack 
+                >
                   {listItems}
                 </HStack>
               </UnorderedList>
