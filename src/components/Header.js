@@ -46,7 +46,6 @@ const listItems = socials.map(
           <Link href={element.url}>
             <FontAwesomeIcon icon={element.icon} 
             size="2x"
-            style={{border: '1px solid white'}}
             />
           </Link>
         </ListItem>
@@ -80,25 +79,22 @@ const Header = () => {
       transitionTimingFunction="ease-in-out"
       backgroundColor="#18181b"
     >
-      <Box color="white" maxWidth="1280px" margin="0 auto" style={{border: '1px solid white'}}>
+      <Box color="white" maxWidth="1280px" margin="0 auto">
         <HStack
           px={16}
           py={4}
           justifyContent="space-around"
           alignItems="center"
         >
-          <nav style={{border: '1px solid white'}}
-            
-          >
+          <nav>
             {/* Add social media links based on the `socials` data */}
               <UnorderedList>
-                <HStack 
-                >
+                <HStack>
                   {listItems}
                 </HStack>
               </UnorderedList>
           </nav>
-          <nav style={{border: '1px solid white'}}>
+          <nav>
             <UnorderedList>
               <HStack spacing={8}>
                 {/* Add links to Projects and Contact me section */}
