@@ -11,7 +11,7 @@ const Card = ({ title, description, imageSrc }) => {
     <>
       <VStack bg='white' rounded='md'>
         <Image rounded='md' src={imageSrc}/>
-        <Heading  color='#080808'>{title}</Heading>
+        <Heading as="h3" color='#080808'>{title}</Heading>
         <Text 
           justifyContent="center"
           w='90%' 
