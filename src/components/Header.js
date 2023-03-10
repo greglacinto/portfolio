@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -55,6 +55,9 @@ const listItems = socials.map(
 
 
 const Header = () => {
+  let previousPosition = useRef(0);
+  let [direction, setDirection] = useState("");
+
   const handleClick = (anchor) => () => {
     const id = `${anchor}-section`;
     console.log(id);
@@ -67,13 +70,25 @@ const Header = () => {
     }
   };
 
+  useEffect(() => {
+    const updatePosition = () => {
+      const currentPosition = window.pageYOffset;
+      setDirection(currentPosition > previousPosition.current ? "down" : "up");
+      previousPosition.current = currentPosition > 0 ? currentPosition : 0;
+    };
+    window.addEventListener("scroll", updatePosition);
+    return () => {
+      window.removeEventListener("scroll", updatePosition)
+    }
+  }, []);
+
   return (
     <Box
-      position="fixed"
+      position={direction === "down" ? "absolute" : "fixed"}
       top={0}
       left={0}
       right={0}
-      translateY={0}
+      translateY={direction === "down" ? -200 : 0}
       transitionProperty="transform"
       transitionDuration=".3s"
       transitionTimingFunction="ease-in-out"
@@ -83,13 +98,13 @@ const Header = () => {
         <HStack
           px={16}
           py={4}
-          justifyContent="space-around"
+          justifyContent="space-between"
           alignItems="center"
         >
           <nav>
             {/* Add social media links based on the `socials` data */}
               <UnorderedList>
-                <HStack>
+                <HStack spacing={8}>
                   {listItems}
                 </HStack>
               </UnorderedList>
